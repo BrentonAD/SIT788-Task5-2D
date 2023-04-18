@@ -1,5 +1,8 @@
 import argparse
+import io
 import time
+
+import numpy as np
 
 from PIL import Image, ImageDraw, ImageFont
 import cv2
@@ -23,6 +26,10 @@ def main():
     project_id = args.project_id
     publish_iteration_name = args.publish_iteration_name
 
+    # Authenticate with Azure Custom Vision Client
+    prediction_credentials = ApiKeyCredentials(in_headers={"Prediction-key": config.PREDICTION_KEY})
+    predictor = CustomVisionPredictionClient(config.PREDICTION_ENDPOINT, prediction_credentials)
+
     # Set the font to use for the annotation
     font = ImageFont.truetype("Arial Narrow Italic.ttf", 32)
     # Configure the colour map from tag to boundary colour
@@ -43,6 +50,7 @@ def main():
     hop = round(fps / KPS)
     # Initialise the current frame number
     curr_frame = 0
+    print("Reading video file")
     # Create a loop to iterate over frames
     while(True):
         # Get the next frame
@@ -81,6 +89,7 @@ def main():
             # Write the image to the video output
             out.write(new_frame)
             # Wait for 1 second to avoid excessive calls to the prediction API
+            print("Processing...")
             time.sleep(1)
         # Increment the current frame number
         curr_frame += 1
@@ -88,6 +97,7 @@ def main():
     # After the video has ended, close the OpenCV connection
     cap.release()
     out.release()
+    print("Object Detection Successful!")
 
 if __name__ == '__main__':
     main()
