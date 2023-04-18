@@ -1,0 +1,5 @@
+TRAINING_ENDPOINT = "https://sit788customvis01.cognitiveservices.azure.com/"
+TRAINING_KEY = "9cb140d538dd4f71afa4cfefbf523514"
+PREDICTION_ENDPOINT= "https://sit788customvis01-prediction.cognitiveservices.azure.com/"
+PREDICTION_KEY = "343aa91e36dc4b6ba71d8608f295dffe"
+PREDICTION_RESOURCE_ID = "/subscriptions/d5d0e7cd-5900-4c80-820c-b24c2a8416d0/resourceGroups/BrentonAdey-SIT788-2023/providers/Microsoft.CognitiveServices/accounts/sit788customvis01-Prediction"
